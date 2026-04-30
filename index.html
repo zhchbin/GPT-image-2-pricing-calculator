@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GPT Image 2 价格计算器</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">OpenAI gpt-image-2</p>
+          <h1 id="page-title">图片生成价格计算器</h1>
+          <p class="intro">
+            输入 prompt、图片尺寸和质量，按官方 output token 估算逻辑与当前价格表拆分成本。
+          </p>
+        </div>
+        <div class="price-card" aria-label="当前价格">
+          <span>Standard</span>
+          <strong>$5</strong>
+          <small>文本输入 / 1M tokens</small>
+          <strong>$30</strong>
+          <small>图像输出 / 1M tokens</small>
+        </div>
+      </section>
+
+      <section class="calculator" aria-label="价格计算器">
+        <form class="panel inputs" id="calculator-form">
+          <label class="field field-full">
+            <span>Prompt 文本</span>
+            <textarea
+              id="prompt"
+              rows="8"
+              placeholder="例如：一张电商主图，白色背景，展示一只透明玻璃水杯，柔和自然光，画面干净..."
+            ></textarea>
+          </label>
+
+          <div class="form-row field-full">
+            <div class="field">
+              <span>质量</span>
+              <div class="segmented" role="radiogroup" aria-label="质量">
+                <label>
+                  <input type="radio" name="quality" value="low" />
+                  <span>Low</span>
+                </label>
+                <label>
+                  <input type="radio" name="quality" value="medium" checked />
+                  <span>Medium</span>
+                </label>
+                <label>
+                  <input type="radio" name="quality" value="high" />
+                  <span>High</span>
+                </label>
+              </div>
+            </div>
+
+            <label class="field">
+              <span>生成张数</span>
+              <input id="quantity" type="number" min="1" step="1" value="1" inputmode="numeric" />
+            </label>
+          </div>
+
+          <div class="form-row field-full">
+            <label class="field">
+              <span>宽度 px</span>
+              <input id="width" type="number" min="1" step="1" value="1024" inputmode="numeric" />
+            </label>
+
+            <label class="field">
+              <span>高度 px</span>
+              <input id="height" type="number" min="1" step="1" value="1024" inputmode="numeric" />
+            </label>
+          </div>
+
+          <label class="field">
+            <span>人民币汇率</span>
+            <input id="exchange-rate" type="number" min="0" step="0.01" value="6.84" inputmode="decimal" />
+          </label>
+
+          <div class="field switch-row">
+            <span>人民币显示</span>
+            <label class="switch">
+              <input id="show-cny" type="checkbox" checked />
+              <span class="switch-track" aria-hidden="true"></span>
+              <span class="switch-label">显示 CNY 估算</span>
+            </label>
+          </div>
+
+          <div class="presets field-full" aria-label="常用尺寸">
+            <button type="button" data-size="1024x1024">1024 x 1024</button>
+            <button type="button" data-size="1536x1024">1536 x 1024</button>
+            <button type="button" data-size="1024x1536">1024 x 1536</button>
+            <button type="button" data-size="2048x2048">2048 x 2048</button>
+            <button type="button" data-size="2048x1152">2048 x 1152</button>
+            <button type="button" data-size="3840x2160">3840 x 2160</button>
+            <button type="button" data-size="2160x3840">2160 x 3840</button>
+          </div>
+        </form>
+
+        <aside class="panel results" aria-live="polite">
+          <div class="total">
+            <span>预计总价</span>
+            <div class="total-prices">
+              <strong id="total-cost">$0.0000</strong>
+              <small id="total-cost-cny">≈ ¥0.0000</small>
+            </div>
+            <div class="per-image">
+              <span>单张成本</span>
+              <strong id="per-image-cost">$0.0000</strong>
+              <small id="per-image-cost-cny">≈ ¥0.0000</small>
+            </div>
+          </div>
+
+          <div class="meter" aria-hidden="true">
+            <span id="text-meter"></span>
+            <span id="image-meter"></span>
+          </div>
+
+          <dl class="breakdown">
+            <div>
+              <dt>输入文本 tokens</dt>
+              <dd id="text-tokens">0</dd>
+            </div>
+            <div>
+              <dt>文本输入成本</dt>
+              <dd id="text-cost">$0.0000</dd>
+            </div>
+            <div>
+              <dt>单张输出 tokens</dt>
+              <dd id="image-tokens">0</dd>
+            </div>
+            <div>
+              <dt>图片输出成本</dt>
+              <dd id="image-cost">$0.0000</dd>
+            </div>
+            <div>
+              <dt>人民币汇率</dt>
+              <dd id="exchange-label">1 USD = 6.84 CNY</dd>
+            </div>
+            <div>
+              <dt>当前费率</dt>
+              <dd id="rate-label">Standard</dd>
+            </div>
+          </dl>
+
+          <div class="notice" id="validation-message"></div>
+          <p class="note">
+            Prompt token 是浏览器端近似估算；实际账单以 API 返回的 usage 为准。编辑接口的输入图片 tokens
+            未包含在此计算器内。
+          </p>
+          <div class="links">
+            <a href="https://developers.openai.com/api/docs/guides/image-generation#gpt-image-2-output-tokens">Output token 文档</a>
+            <a href="https://developers.openai.com/api/docs/pricing#image-generation">Pricing 文档</a>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
