@@ -3,8 +3,88 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GPT Image 2 价格计算器</title>
+    <title>GPT Image 2 价格计算器 | OpenAI 图片生成成本估算</title>
+    <meta
+      name="description"
+      content="免费的 GPT Image 2 价格计算器，按 prompt、图片尺寸、质量、生成张数和人民币汇率估算 OpenAI gpt-image-2 文生图成本。"
+    />
+    <meta
+      name="keywords"
+      content="GPT Image 2 价格,gpt-image-2 pricing,OpenAI 图片生成价格,AI 图片成本计算器,文生图成本,output tokens"
+    />
+    <meta name="robots" content="index,follow" />
+    <meta name="author" content="zhchbin" />
+    <link rel="canonical" href="https://zhchbin.github.io/GPT-image-2-pricing-calculator/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="GPT Image 2 价格计算器" />
+    <meta property="og:title" content="GPT Image 2 价格计算器" />
+    <meta
+      property="og:description"
+      content="输入 prompt、尺寸、质量和张数，快速估算 OpenAI gpt-image-2 图片生成美元与人民币成本。"
+    />
+    <meta property="og:url" content="https://zhchbin.github.io/GPT-image-2-pricing-calculator/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="GPT Image 2 价格计算器" />
+    <meta
+      name="twitter:description"
+      content="按 output tokens 和当前费率估算 gpt-image-2 图片生成成本，支持人民币换算。"
+    />
     <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "GPT Image 2 价格计算器",
+        "alternateName": "gpt-image-2 pricing calculator",
+        "url": "https://zhchbin.github.io/GPT-image-2-pricing-calculator/",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "description": "用于估算 OpenAI gpt-image-2 图片生成成本的在线计算器，支持 prompt 文本、图片尺寸、质量、张数和人民币汇率。",
+        "featureList": [
+          "估算 gpt-image-2 prompt 文本 tokens",
+          "按图片尺寸和质量估算 output tokens",
+          "计算美元和人民币成本",
+          "支持常用图片尺寸快捷选择"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "creator": {
+          "@type": "Person",
+          "name": "zhchbin",
+          "url": "https://github.com/zhchbin"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "GPT Image 2 价格计算器可以计算什么？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "它可以根据 prompt 文本、图片宽高、质量档位、生成张数和汇率，估算 OpenAI gpt-image-2 图片生成的美元和人民币成本。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "计算结果是否等同于实际账单？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "不是。浏览器端 prompt token 为近似估算，实际费用应以 OpenAI API 返回的 usage 和账单为准。"
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <main class="shell">
@@ -154,6 +234,24 @@
             <a href="https://developers.openai.com/api/docs/pricing#image-generation">Pricing 文档</a>
           </div>
         </aside>
+      </section>
+
+      <section class="seo-content" aria-labelledby="seo-title">
+        <h2 id="seo-title">GPT Image 2 图片生成成本估算工具</h2>
+        <p>
+          这个在线计算器用于估算 OpenAI gpt-image-2 的图片生成价格。你可以输入中文或英文
+          prompt，选择 low、medium、high 质量档位，设置图片宽高和生成张数，然后查看文本输入
+          tokens、单张输出 tokens、美元成本以及人民币换算结果。
+        </p>
+        <p>
+          当前 Standard 费率按文本输入 $5 / 1M tokens、图像输出 $30 / 1M tokens 计算。图片
+          output tokens 会受尺寸、长宽比例和质量档位影响，因此同样的 prompt 在 1024 x 1024、
+          1536 x 1024、2048 x 2048 等尺寸下会产生不同成本。
+        </p>
+        <p>
+          本工具适合在调用 OpenAI Images API 前做预算评估、批量生成报价、内容生产成本预估和
+          AI 图片服务定价参考。最终账单仍以 OpenAI API 返回的 usage 和官方账单为准。
+        </p>
       </section>
     </main>
 

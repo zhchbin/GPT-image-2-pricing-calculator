@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zhchbin.github.io/GPT-image-2-pricing-calculator/sitemap.xml
