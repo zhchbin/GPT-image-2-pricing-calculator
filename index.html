@@ -101,36 +101,43 @@
     <main class="shell">
       <section class="hero" aria-labelledby="page-title">
         <div>
-          <p class="eyebrow">OpenAI gpt-image-2</p>
-          <h1 id="page-title">图片生成价格计算器</h1>
-          <p class="intro">
+          <div class="hero-topline">
+            <p class="eyebrow">OpenAI gpt-image-2</p>
+            <div class="language-switch" role="group" aria-label="Language">
+              <button type="button" class="active" data-lang="zh">中文</button>
+              <button type="button" data-lang="en">EN</button>
+            </div>
+          </div>
+          <h1 id="page-title" data-i18n="hero.title">图片生成价格计算器</h1>
+          <p class="intro" data-i18n="hero.intro">
             输入 prompt、图片尺寸和质量，按官方 output token 估算逻辑与当前价格表拆分成本。
           </p>
         </div>
-        <div class="price-card" aria-label="当前价格">
+        <div class="price-card" aria-label="当前价格" data-i18n-attr="aria-label:pricing.aria">
           <span>Standard</span>
           <strong>$5</strong>
-          <small>文本输入 / 1M tokens</small>
+          <small data-i18n="pricing.textInput">文本输入 / 1M tokens</small>
           <strong>$30</strong>
-          <small>图像输出 / 1M tokens</small>
+          <small data-i18n="pricing.imageOutput">图像输出 / 1M tokens</small>
         </div>
       </section>
 
-      <section class="calculator" aria-label="价格计算器">
+      <section class="calculator" aria-label="价格计算器" data-i18n-attr="aria-label:calculator.aria">
         <form class="panel inputs" id="calculator-form">
           <label class="field field-full">
-            <span>Prompt 文本</span>
+            <span data-i18n="form.promptLabel">Prompt 文本</span>
             <textarea
               id="prompt"
               rows="8"
               placeholder="例如：一张电商主图，白色背景，展示一只透明玻璃水杯，柔和自然光，画面干净..."
+              data-i18n-attr="placeholder:form.promptPlaceholder"
             ></textarea>
           </label>
 
           <div class="form-row field-full">
             <div class="field">
-              <span>质量</span>
-              <div class="segmented" role="radiogroup" aria-label="质量">
+              <span data-i18n="form.qualityLabel">质量</span>
+              <div class="segmented" role="radiogroup" aria-label="质量" data-i18n-attr="aria-label:form.qualityLabel">
                 <label>
                   <input type="radio" name="quality" value="low" />
                   <span>Low</span>
@@ -147,38 +154,38 @@
             </div>
 
             <label class="field">
-              <span>生成张数</span>
+              <span data-i18n="form.quantityLabel">生成张数</span>
               <input id="quantity" type="number" min="1" step="1" value="1" inputmode="numeric" />
             </label>
           </div>
 
           <div class="form-row field-full">
             <label class="field">
-              <span>宽度 px</span>
+              <span data-i18n="form.widthLabel">宽度 px</span>
               <input id="width" type="number" min="1" step="1" value="1024" inputmode="numeric" />
             </label>
 
             <label class="field">
-              <span>高度 px</span>
+              <span data-i18n="form.heightLabel">高度 px</span>
               <input id="height" type="number" min="1" step="1" value="1024" inputmode="numeric" />
             </label>
           </div>
 
           <label class="field">
-            <span>人民币汇率</span>
+            <span data-i18n="form.exchangeLabel">人民币汇率</span>
             <input id="exchange-rate" type="number" min="0" step="0.01" value="6.84" inputmode="decimal" />
           </label>
 
           <div class="field switch-row">
-            <span>人民币显示</span>
+            <span data-i18n="form.cnyDisplay">人民币显示</span>
             <label class="switch">
               <input id="show-cny" type="checkbox" checked />
               <span class="switch-track" aria-hidden="true"></span>
-              <span class="switch-label">显示 CNY 估算</span>
+              <span class="switch-label" data-i18n="form.cnyToggle">显示 CNY 估算</span>
             </label>
           </div>
 
-          <div class="presets field-full" aria-label="常用尺寸">
+          <div class="presets field-full" aria-label="常用尺寸" data-i18n-attr="aria-label:form.presetsAria">
             <button type="button" data-size="1024x1024">1024 x 1024</button>
             <button type="button" data-size="1536x1024">1536 x 1024</button>
             <button type="button" data-size="1024x1536">1024 x 1536</button>
@@ -191,13 +198,13 @@
 
         <aside class="panel results" aria-live="polite">
           <div class="total">
-            <span>预计总价</span>
+            <span data-i18n="results.totalLabel">预计总价</span>
             <div class="total-prices">
               <strong id="total-cost">$0.0000</strong>
               <small id="total-cost-cny">≈ ¥0.0000</small>
             </div>
             <div class="per-image">
-              <span>单张成本</span>
+              <span data-i18n="results.perImageLabel">单张成本</span>
               <strong id="per-image-cost">$0.0000</strong>
               <small id="per-image-cost-cny">≈ ¥0.0000</small>
             </div>
@@ -210,56 +217,56 @@
 
           <dl class="breakdown">
             <div>
-              <dt>输入文本 tokens</dt>
+              <dt data-i18n="results.textTokens">输入文本 tokens</dt>
               <dd id="text-tokens">0</dd>
             </div>
             <div>
-              <dt>文本输入成本</dt>
+              <dt data-i18n="results.textCost">文本输入成本</dt>
               <dd id="text-cost">$0.0000</dd>
             </div>
             <div>
-              <dt>单张输出 tokens</dt>
+              <dt data-i18n="results.imageTokens">单张输出 tokens</dt>
               <dd id="image-tokens">0</dd>
             </div>
             <div>
-              <dt>图片输出成本</dt>
+              <dt data-i18n="results.imageCost">图片输出成本</dt>
               <dd id="image-cost">$0.0000</dd>
             </div>
             <div>
-              <dt>人民币汇率</dt>
+              <dt data-i18n="results.exchangeRate">人民币汇率</dt>
               <dd id="exchange-label">1 USD = 6.84 CNY</dd>
             </div>
             <div>
-              <dt>当前费率</dt>
+              <dt data-i18n="results.currentRate">当前费率</dt>
               <dd id="rate-label">Standard</dd>
             </div>
           </dl>
 
           <div class="notice" id="validation-message"></div>
-          <p class="note">
+          <p class="note" data-i18n="results.note">
             Prompt token 是浏览器端近似估算；实际账单以 API 返回的 usage 为准。编辑接口的输入图片 tokens
             未包含在此计算器内。
           </p>
           <div class="links">
-            <a href="https://developers.openai.com/api/docs/guides/image-generation#gpt-image-2-output-tokens">Output token 文档</a>
-            <a href="https://developers.openai.com/api/docs/pricing#image-generation">Pricing 文档</a>
+            <a href="https://developers.openai.com/api/docs/guides/image-generation#gpt-image-2-output-tokens" data-i18n="links.outputTokens">Output token 文档</a>
+            <a href="https://developers.openai.com/api/docs/pricing#image-generation" data-i18n="links.pricing">Pricing 文档</a>
           </div>
         </aside>
       </section>
 
       <section class="seo-content" aria-labelledby="seo-title">
-        <h2 id="seo-title">GPT Image 2 图片生成成本估算工具</h2>
-        <p>
+        <h2 id="seo-title" data-i18n="seo.title">GPT Image 2 图片生成成本估算工具</h2>
+        <p data-i18n="seo.p1">
           这个在线计算器用于估算 OpenAI gpt-image-2 的图片生成价格。你可以输入中文或英文
           prompt，选择 low、medium、high 质量档位，设置图片宽高和生成张数，然后查看文本输入
           tokens、单张输出 tokens、美元成本以及人民币换算结果。
         </p>
-        <p>
+        <p data-i18n="seo.p2">
           当前 Standard 费率按文本输入 $5 / 1M tokens、图像输出 $30 / 1M tokens 计算。图片
           output tokens 会受尺寸、长宽比例和质量档位影响，因此同样的 prompt 在 1024 x 1024、
           1536 x 1024、2048 x 2048 等尺寸下会产生不同成本。
         </p>
-        <p>
+        <p data-i18n="seo.p3">
           本工具适合在调用 OpenAI Images API 前做预算评估、批量生成报价、内容生产成本预估和
           AI 图片服务定价参考。最终账单仍以 OpenAI API 返回的 usage 和官方账单为准。
         </p>

@@ -50,13 +50,52 @@ textarea {
   margin-bottom: 24px;
 }
 
-.eyebrow {
+.hero-topline {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
   margin: 0 0 10px;
+}
+
+.eyebrow {
+  margin: 0;
   color: var(--accent-strong);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0;
   text-transform: uppercase;
+}
+
+.language-switch {
+  display: inline-flex;
+  overflow: hidden;
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.language-switch button {
+  min-width: 54px;
+  min-height: 34px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0 10px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.language-switch button.active {
+  background: var(--accent);
+  color: white;
+}
+
+.language-switch button:focus-visible {
+  outline: 3px solid rgba(15, 118, 110, 0.18);
+  outline-offset: -3px;
 }
 
 h1 {
@@ -459,6 +498,11 @@ input[type="number"]:focus {
 }
 
 @media (max-width: 520px) {
+  .hero-topline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .shell {
     width: min(100% - 20px, 1180px);
     padding: 22px 0;
